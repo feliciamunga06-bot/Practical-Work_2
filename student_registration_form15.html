@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOOM COLLEGE - Student Registration Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ffeef5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h2 {
+      color: hotpink;
+      margin-top: 20px;
+    }
+
+    form {
+      background-color: #fff;
+      border-radius: 15px;
+      width: 70%;
+      margin: 20px auto;
+      padding: 20px;
+      box-shadow: 0 0 15px #ffd4e1;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, select {
+      width: 98%;
+      padding: 8px;
+      margin: 4px 0 10px 0;
+      border: 1px solid pink;
+      border-radius: 6px;
+    }
+
+    input:focus {
+      border: 2px solid hotpink;
+      outline: none;
+    }
+
+    .btn {
+      background-color: pink;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 10px 4px;
+    }
+
+    .btn:hover {
+      background-color: hotpink;
+      color: white;
+    }
+
+    .section-title {
+      text-align: center;
+      color: hotpink;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    /* upload box */
+    .upload-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      width: 180px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #777;
+      cursor: pointer;
+      margin: 10px auto;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .upload-box:hover {
+      border-color: hotpink;
+      color: hotpink;
+    }
+
+    #imageInput {
+      display: none;
+    }
+
+    #preview {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .gender-container {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      gap: 15px;
+    }
+
+    .gender-container label {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .gender-options {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .gender-options label {
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0;
+    }
+
+    .gender-options input[type="radio"] {
+      accent-color: hotpink;
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    .small-text {
+      font-size: 12px;
+      color: gray;
+      margin-top: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>BLOOM COLLEGE<br>Student Registration Form</h2>
+
+  <form id="studentForm">
+    <label>Student Image:</label>
+    <div class="upload-box" id="uploadBox" onclick="document.getElementById('imageInput').click();">
+      <span id="uploadText">Click to Upload</span>
+      <img id="preview" alt="Preview">
+    </div>
+    <input type="file" accept="image/*" id="imageInput">
+    <small class="small-text">(less than 5 MB)</small>
+
+    <label>Student Name:</label>
+    <input type="text" name="Student Name" onChange="handleChange(this)" onBlur="handleBlur(this)" placeholder="Full Name">
+
+    <label>Father's Name:</label>
+    <input type="text" name="Father's Name" onChange="handleChange(this)" onBlur="handleBlur(this)" placeholder="Father's Full Name">
+
+    <label>Mother's Name:</label>
+    <input type="text" name="Mother's Name" onChange="handleChange(this)" onBlur="handleBlur(this)" placeholder="Mother's Full Name">
+
+    <!-- Gender Row -->
+    <div class="gender-container">
+      <label>Gender:</label>
+      <div class="gender-options">
+        <label><input type="radio" name="gender" value="male"> Male</label>
+        <label><input type="radio" name="gender" value="female"> Female</label>
+      </div>
+    </div>
+
+    <label>Date of Birth:</label>
+    <input type="date" name="Date of Birth" onBlur="handleBlur(this)">
+
+    <label>Email:</label>
+    <input type="email" name="Email" onFocus="handleFocus(this)" onBlur="handleBlur(this)" placeholder="mail@example.com">
+
+    <label>Level:</label>
+    <select>
+      <option>Foundation</option>
+      <option>Diploma</option>
+      <option>Degree</option>
+      <option>PhD</option>
+    </select>
+
+    <label>Department:</label>
+    <select>
+      <option>JTMK</option>
+      <option>JKE</option>
+      <option>JKA</option>
+      <option>JP</option>
+    </select>
+
+    <label>Tel/Mobile:</label>
+    <input type="text" name="Tel/Mobile" onBlur="handleBlur(this)" placeholder="01X-XXXXXXX">
+
+    <p class="section-title">Address</p>
+
+    <label>State:</label>
+    <input type="text" name="State" onBlur="handleBlur(this)" placeholder="State">
+
+    <label>City:</label>
+    <input type="text" name="City" onBlur="handleBlur(this)" placeholder="City">
+
+    <label>Postcode:</label>
+    <input type="text" name="Postcode" onBlur="handleBlur(this)" placeholder="Postcode">
+
+    <div style="text-align:center;">
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#successModal" onclick="submitForm()">Register</button>
+      <button type="reset" class="btn">Reset</button>
+    </div>
+  </form>
+
+  <!-- Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-pink" style="background-color: pink;">
+          <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+        </div>
+        <div class="modal-body text-center">
+          🌷 Your details have been saved!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function handleBlur(field) { console.log(field.name + " field has lost focus"); }
+    function handleFocus(field) {
+      field.style.backgroundColor = "#fff0f5";
+      field.placeholder = "Please enter your valid email";
+    }
+    function handleChange(field) { field.value = field.value.toUpperCase(); }
+
+    document.getElementById("imageInput").addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      const preview = document.getElementById("preview");
+      const uploadText = document.getElementById("uploadText");
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+          uploadText.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function submitForm() {
+      const form = document.getElementById("studentForm");
+      if (form.checkValidity()) {
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      } else {
+        alert("Please fill out all required fields.");
+      }
+    }
+  </script>
+</body>
+</html>
